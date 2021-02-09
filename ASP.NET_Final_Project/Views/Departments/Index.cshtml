@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Departments";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewBag.Title</h1>
+</div>
+@Html.ActionLink("Add new Department",
+    "Add",
+    "Departments",
+    null,
+    new {@class = "btn btn-primary mb-5"}
+    )
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">User</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var department in ViewBag.departments)
+    {
+        <tr>
+            <th scope="row">@department.Id</th>
+            <td>@department.Name</td>
+            <td>@department.UserId</td>
+            <td>
+                <small>
+                    @Html.ActionLink("Edit",
+                        "Edit",
+                        "Departments",
+                        new {id = department.Id},
+                        new {@class = "text-small text-info"}
+                        )
+                    @if (department.Employees == null)
+                    {
+                        @Html.ActionLink("Delete",
+                            "Delete",
+                            "Departments",
+                            new {id = department.Id},
+                            new {@class = "text-small text-danger ml-3"}
+                            )
+                    }
+                </small>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,16 @@
+﻿@model ASP.NET_Final_Project.Models.Department
+@{
+    ViewData["Title"] = "Add Department";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewBag.Title</h1>
+</div>
+
+<form action="/departments/AddDepartment" method="post">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        @Html.EditorFor(x => x.Name, new {@class = "form-control"})
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
