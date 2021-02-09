@@ -9,9 +9,12 @@ namespace ASP.NET_Final_Project.Models
         [Key] [ForeignKey("Employee")] public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:yyyy}", ApplyFormatInEditMode = true)]
         public DateTime StartWorkYear { get; set; }
-        public int DepartmentId { get; set; }
-        
+
+        [Required] public int DepartmentId { get; set; }
+
         public virtual Department Department { get; set; }
     }
 }

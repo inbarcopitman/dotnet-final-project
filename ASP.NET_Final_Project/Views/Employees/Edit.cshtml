@@ -1,0 +1,29 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewBag.Title</h1>
+</div>
+
+<form action="/employees/UpdateEmployee" method="post">
+    @Html.HiddenFor(x => x.Id)
+    <div class="mb-3">
+        <label for="first_name" class="form-label">First Name</label>
+        @Html.EditorFor(x => x.FirstName)
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Last Name</label>
+        @Html.EditorFor(x => x.LastName)
+    </div>
+    <div class="mb-3">
+        <label for="start_year_work" class="form-label">Start Year Work</label>
+        @Html.EditorFor(x => x.StartWorkYear)
+    </div>
+    <div class="mb-3">
+        <label for="department" class="form-label">Department</label>
+        @Html.DropDownListFor(x => x.DepartmentId, ViewBag.Departments as IEnumerable<SelectListItem>, "Please select")
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

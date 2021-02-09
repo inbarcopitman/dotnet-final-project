@@ -1,0 +1,21 @@
+@model Shift
+@{
+    ViewData["Title"] = "Add Shift To Employee";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewBag.Title</h1>
+</div>
+
+<form action="/shifts/AddShift" method="post">
+    <p>Adding shift for <b>@string.Join(" ", ViewBag.Employee.FirstName, ViewBag.Employee.LastName)</b></p>
+    <div class="mb-3">
+        <label for="start_time" class="form-label">Start Time</label>
+        @Html.EditorFor(x => x.StartTime)
+    </div>
+    <div class="mb-3">
+        <label for="end_time" class="form-label">End Time</label>
+        @Html.EditorFor(x => x.EndTime)
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>

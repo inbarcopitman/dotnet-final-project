@@ -18,3 +18,7 @@ Execute query: `GO`
 To run the project execute the command:
 `cd ASP.NET_Final_Project/`
 `dotnet watch run`
+
+**Migration**
+Run the following command to build you DB.
+`update-database`

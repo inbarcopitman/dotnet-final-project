@@ -1,4 +1,4 @@
-﻿@model ASP.NET_Final_Project.Models.Department
+﻿@model Department
 @{
     ViewData["Title"] = "Edit Department";
 }
@@ -8,10 +8,10 @@
 </div>
 
 <form action="/departments/UpdateDepartment" method="post">
+    @Html.HiddenFor(x => x.Id)
     <div class="mb-3">
-        @Html.HiddenFor(x => x.Id)
         <label for="name" class="form-label">Name</label>
-        @Html.EditorFor(x => x.Name, new {@class = "form-control"})
+        @Html.EditorFor(x => x.Name)
     </div>
     <button type="submit" class="btn btn-primary">Update</button>
 </form>
