@@ -17,7 +17,7 @@ namespace ASP.NET_Final_Project.Controllers
         
         public IActionResult Index()
         {
-            ViewBag.departments = _db.Departments.ToList();
+            ViewBag.departments = _db.Departments.ToList(); // TODO get relative to user id
             return View();
         }
         
@@ -29,7 +29,7 @@ namespace ASP.NET_Final_Project.Controllers
         [HttpPost]
         public ActionResult AddDepartment(Department dep)
         {
-            dep.UserId = 1;
+            dep.UserId = 1; // TODO change to user id from session.
             _db.Departments.Add(dep);
             _db.SaveChanges();
             
