@@ -21,14 +21,14 @@ namespace ASP.NET_Final_Project.Controllers
                 .Join(_db.EmployeeShifts, // join Model1s and Model2s
                     employee => employee.Id, // from every Model1 take the foreign key Model2Id
                     employeeshift => employeeshift.EmployeeId, // from every Model2 take the primary key Id
-                    (employee, employeeshift) => new // when they match use the matching models to create
+                    (employee, employeeshift) => new MyClass // when they match use the matching models to create
                     {
                         // a new object with the following properties
                         SomeProperty = employeeshift.Id,
                         SomeOtherProperty = employee.Id
                     });
 
-            ViewBag.ss = result;
+            ViewBag.data = result;
             return View();
         }
 

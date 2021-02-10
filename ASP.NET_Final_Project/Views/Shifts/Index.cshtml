@@ -15,7 +15,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var employee in ViewBag.ss)
+    @foreach (var employee in (IEnumerable<dynamic>) ViewBag.data)
     {
         <tr>
             <td>@employee.SomeProperty</td>
