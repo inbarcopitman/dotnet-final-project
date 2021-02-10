@@ -15,12 +15,18 @@ namespace ASP.NET_Final_Project.Controllers
             _db = db;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult AddShift(int Id)
         {
             ViewBag.Employee = _db.Employees.First(x => x.Id == Id);
             return View("AddShift");
         }
 
+        [HttpPost]
         public IActionResult SaveShift(Shift shift)
         {
             var employeeId = Request.Form["EmployeeId"];
