@@ -7,8 +7,9 @@
     <h1 class="display-4">@ViewBag.Title</h1>
 </div>
 
-<form action="/shifts/AddShift" method="post">
+<form action="/shifts/SaveShift" method="post">
     <p>Adding shift for <b>@string.Join(" ", ViewBag.Employee.FirstName, ViewBag.Employee.LastName)</b></p>
+    @Html.Hidden("EmployeeId", (int) ViewBag.Employee.Id)
     <div class="mb-3">
         <label for="start_time" class="form-label">Start Time</label>
         @Html.EditorFor(x => x.StartTime)

@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
 using ASP.NET_Final_Project.Data;
+using ASP.NET_Final_Project.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASP.NET_Final_Project.Controllers
@@ -19,11 +21,20 @@ namespace ASP.NET_Final_Project.Controllers
             return View("AddShift");
         }
 
-        //
-        // public IActionResult SaveShift(Shift shift)
-        // {
-        //     // ViewBag.EmployeeId = Id;
-        //     // return View("Index");
-        // }
+        public IActionResult SaveShift(Shift shift)
+        {
+            var employeeId = Request.Form["EmployeeId"];
+            shift.Date = DateTime.Now;
+            _db.Shifts.Add(shift);
+            _db.SaveChanges();
+
+            var es = new EmployeeShift();
+            es.EmployeeId = int.Parse(employeeId);
+            es.ShiftId = shift.Id;
+            _db.EmployeeShifts.Add(es);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index", "Employees");
+        }
     }
 }
