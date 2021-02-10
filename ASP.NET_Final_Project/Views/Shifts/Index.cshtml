@@ -15,21 +15,21 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var employee in ViewBag.employees)
+    @foreach (var employee in ViewBag.ss)
     {
         <tr>
-            <td>@string.Join(" ", employee.FirstName, employee.LastName)</td>
+            <td>@employee.SomeProperty</td>
             <td></td>
             <td></td>
             <td>
-                <small>
-                    @Html.ActionLink("AddShift",
-                        "AddShift",
-                        "Shifts",
-                        new {id = employee.Id},
-                        new {@class = "text-small text-primary ml-3"}
-                        )
-                </small>
+                @* <small> *@
+                @*     @Html.ActionLink("AddShift", *@
+                @*         "AddShift", *@
+                @*         "Shifts", *@
+                @*         new {id = employee.SomeProperty}, *@
+                @*         new {@class = "text-small text-primary ml-3"} *@
+                @*         ) *@
+                @* </small> *@
             </td>
         </tr>
     }
