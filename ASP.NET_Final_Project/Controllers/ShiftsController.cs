@@ -17,16 +17,17 @@ namespace ASP.NET_Final_Project.Controllers
 
         public IActionResult Index()
         {
-            var result = _db.Employees
-                .Join(_db.EmployeeShifts, // join Model1s and Model2s
-                    employee => employee.Id, // from every Model1 take the foreign key Model2Id
-                    employeeshift => employeeshift.EmployeeId, // from every Model2 take the primary key Id
-                    (employee, employeeshift) => new MyClass // when they match use the matching models to create
-                    {
-                        // a new object with the following properties
-                        SomeProperty = employeeshift.Id,
-                        SomeOtherProperty = employee.Id
-                    });
+            var result = from a in _db.Shifts
+                join b in _db.EmployeeShifts on a.Id equals b.ShiftId
+                join c in _db.Employees on b.EmployeeId equals c.Id
+                select new EmployeeShiftJoin
+                {
+                    EmployeeId = c.Id,
+                    FullName = string.Join(" ", c.FirstName, c.LastName),
+                    Date = a.Date,
+                    ShiftStart = a.StartTime,
+                    ShiftEnd = a.EndTime
+                };
 
             ViewBag.data = result;
             return View();

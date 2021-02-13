@@ -10,26 +10,36 @@
     <thead>
     <tr>
         <th scope="col">Full Name</th>
-        <th scope="col">Shifts</th>
-        <th scope="col">Action</th>
+        <th scope="col">Date</th>
+        <th scope="col">Shift start</th>
+        <th scope="col">Shift end</th>
+        <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var employee in (IEnumerable<dynamic>) ViewBag.data)
+    @foreach (var data in (IEnumerable<dynamic>) ViewBag.data)
     {
         <tr>
-            <td>@employee.SomeProperty</td>
-            <td></td>
-            <td></td>
             <td>
-                @* <small> *@
-                @*     @Html.ActionLink("AddShift", *@
-                @*         "AddShift", *@
-                @*         "Shifts", *@
-                @*         new {id = employee.SomeProperty}, *@
-                @*         new {@class = "text-small text-primary ml-3"} *@
-                @*         ) *@
-                @* </small> *@
+                @Html.ActionLink((string) data.FullName,
+                    "AddShift",
+                    "Shifts",
+                    new {id = data.EmployeeId},
+                    new {@class = "text-small text-primary ml-3"}
+                    )
+            </td>
+            <td>@data.Date</td>
+            <td>@data.ShiftStart</td>
+            <td>@data.ShiftEnd</td>
+            <td>
+                <small>
+                    @Html.ActionLink("AddShift",
+                        "AddShift",
+                        "Shifts",
+                        new {id = data.EmployeeId},
+                        new {@class = "text-small text-primary ml-3"}
+                        )
+                </small>
             </td>
         </tr>
     }
