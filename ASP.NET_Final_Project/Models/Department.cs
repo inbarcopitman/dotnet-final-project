@@ -9,7 +9,7 @@ namespace ASP.NET_Final_Project.Models
         [Key] [ForeignKey("Department")] public int Id { get; set; }
         public string Name { get; set; }
 
-        [Required] public int UserId { get; set; }
+        [Required] public int? UserId { get; set; }
 
         public virtual User User { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }

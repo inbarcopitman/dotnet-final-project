@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using ASP.NET_Final_Project.Data;
 using ASP.NET_Final_Project.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASP.NET_Final_Project.Controllers
@@ -17,9 +18,12 @@ namespace ASP.NET_Final_Project.Controllers
 
         public IActionResult Index()
         {
+            var userId = HttpContext.Session.GetInt32("Id");
+
             var result = from a in _db.Shifts
                 join b in _db.EmployeeShifts on a.Id equals b.ShiftId
                 join c in _db.Employees on b.EmployeeId equals c.Id
+                where c.Department.UserId == userId
                 select new EmployeeShiftJoin
                 {
                     EmployeeId = c.Id,
@@ -35,7 +39,8 @@ namespace ASP.NET_Final_Project.Controllers
 
         public IActionResult AddShift(int Id)
         {
-            ViewBag.Employee = _db.Employees.First(x => x.Id == Id);
+            var userId = HttpContext.Session.GetInt32("Id");
+            ViewBag.Employee = _db.Employees.First(x => x.Id == Id && x.Department.UserId == userId);
             return View("AddShift");
         }
 

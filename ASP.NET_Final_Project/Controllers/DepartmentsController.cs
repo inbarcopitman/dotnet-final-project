@@ -1,6 +1,7 @@
 using System.Linq;
 using ASP.NET_Final_Project.Data;
 using ASP.NET_Final_Project.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASP.NET_Final_Project.Controllers
@@ -16,7 +17,8 @@ namespace ASP.NET_Final_Project.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.departments = _db.Departments.ToList(); // TODO get relative to user id
+            var userId = HttpContext.Session.GetInt32("Id");
+            ViewBag.departments = _db.Departments.Where(x => x.UserId == userId).ToList();
 
             return View();
         }
@@ -29,7 +31,7 @@ namespace ASP.NET_Final_Project.Controllers
         [HttpPost]
         public ActionResult AddDepartment(Department dep)
         {
-            dep.UserId = 1; // TODO change to user id from session.
+            dep.UserId = HttpContext.Session.GetInt32("Id");
             _db.Departments.Add(dep);
             _db.SaveChanges();
 
@@ -38,7 +40,8 @@ namespace ASP.NET_Final_Project.Controllers
 
         public IActionResult Edit(int Id)
         {
-            var dep = _db.Departments.First(x => x.Id == Id);
+            var userId = HttpContext.Session.GetInt32("Id");
+            var dep = _db.Departments.First(x => x.Id == Id && x.UserId == userId);
 
             return View("Edit", dep);
         }
@@ -46,7 +49,8 @@ namespace ASP.NET_Final_Project.Controllers
         [HttpPost]
         public ActionResult UpdateDepartment(Department dep)
         {
-            var department = _db.Departments.FirstOrDefault(x => x.Id == dep.Id);
+            var userId = HttpContext.Session.GetInt32("Id");
+            var department = _db.Departments.FirstOrDefault(x => x.Id == dep.Id && x.UserId == userId);
             if (department != null) department.Name = dep.Name;
             _db.SaveChanges();
 
@@ -55,7 +59,8 @@ namespace ASP.NET_Final_Project.Controllers
 
         public IActionResult Delete(int Id)
         {
-            var department = _db.Departments.First(x => x.Id == Id);
+            var userId = HttpContext.Session.GetInt32("Id");
+            var department = _db.Departments.First(x => x.Id == Id && x.UserId == userId);
             if (department != null) _db.Departments.Remove(department);
             _db.SaveChanges();
 
