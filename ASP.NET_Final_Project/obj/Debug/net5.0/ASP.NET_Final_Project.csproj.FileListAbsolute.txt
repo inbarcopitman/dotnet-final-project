@@ -80,3 +80,4 @@
 /Users/mimoncopitman/Desktop/Technion/ASP.NET_Final_Project/ASP.NET_Final_Project/obj/Debug/net5.0/Razor/Views/Employees/Add.cshtml.g.cs
 /Users/mimoncopitman/Desktop/Technion/ASP.NET_Final_Project/ASP.NET_Final_Project/obj/Debug/net5.0/Razor/Views/Shifts/AddShift.cshtml.g.cs
 /Users/mimoncopitman/Desktop/Technion/ASP.NET_Final_Project/ASP.NET_Final_Project/obj/Debug/net5.0/Razor/Views/Shifts/Index.cshtml.g.cs
+/Users/mimoncopitman/Desktop/Technion/ASP.NET_Final_Project/ASP.NET_Final_Project/obj/Debug/net5.0/Razor/Views/Login/index.cshtml.g.cs
