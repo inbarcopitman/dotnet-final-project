@@ -8,6 +8,18 @@ namespace ASP.NET_Final_Project.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                "Shifts",
+                table => new
+                {
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>("datetime2", nullable: false),
+                    StartTime = table.Column<DateTime>("datetime2", nullable: false),
+                    EndTime = table.Column<DateTime>("datetime2", nullable: false)
+                },
+                constraints: table => { table.PrimaryKey("PK_Shifts", x => x.Id); });
+
+            migrationBuilder.CreateTable(
                 "Users",
                 table => new
                 {
@@ -16,7 +28,7 @@ namespace ASP.NET_Final_Project.Migrations
                     FullName = table.Column<string>("nvarchar(max)", nullable: true),
                     UserName = table.Column<string>("nvarchar(max)", nullable: true),
                     Password = table.Column<string>("nvarchar(max)", nullable: true),
-                    NumOfActions = table.Column<int>("int", nullable: false)
+                    NumOfActions = table.Column<int>("int", nullable: false, defaultValue: 10)
                 },
                 constraints: table => { table.PrimaryKey("PK_Users", x => x.Id); });
 
@@ -61,19 +73,6 @@ namespace ASP.NET_Final_Project.Migrations
                         "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-
-            migrationBuilder.CreateTable(
-                "Shifts",
-                table => new
-                {
-                    Id = table.Column<int>("int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>("datetime2", nullable: false),
-                    StartTime = table.Column<DateTime>("datetime2", nullable: false),
-                    EndTime = table.Column<DateTime>("datetime2", nullable: false)
-                },
-                constraints: table => { table.PrimaryKey("PK_Shifts", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 "EmployeeShifts",

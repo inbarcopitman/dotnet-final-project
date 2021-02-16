@@ -52,6 +52,34 @@ namespace ASP.NET_Final_Project
 
             app.UseSession();
 
+            app.Use(async (context, next) =>
+            {
+                var loggedIn = context.Session.GetInt32("LoggedIn");
+                var currentPage = context.Request.Path.Value;
+                var loginPath = "/login";
+                var homePath = "/";
+
+                if (loggedIn == null)
+                {
+                    if (currentPage == "/login" || currentPage == "/" || currentPage == "/login/PostLogin")
+                    {
+                        await next();
+                        return;
+                    }
+
+                    context.Response.Redirect(loginPath);
+                    return;
+                }
+
+                if (currentPage == "/login")
+                {
+                    context.Response.Redirect(homePath);
+                    return;
+                }
+
+                await next();
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

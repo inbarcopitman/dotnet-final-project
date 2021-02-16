@@ -12,11 +12,6 @@ namespace ASP.NET_Final_Project.Models
             _db = db;
         }
 
-        public static User CheckCredentials(User userObj)
-        {
-            return _db.Users.First(x => x.UserName == userObj.UserName && x.Password == userObj.Password);
-        }
-
         public void CheckAndAddActions()
         {
             var userId = 1;

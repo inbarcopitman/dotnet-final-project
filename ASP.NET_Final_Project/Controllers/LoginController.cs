@@ -1,4 +1,5 @@
-using ASP.NET_Final_Project.Models;
+using System.Linq;
+using ASP.NET_Final_Project.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,7 +7,12 @@ namespace ASP.NET_Final_Project.Controllers
 {
     public class LoginController : Controller
     {
-        public object Session { get; set; }
+        private readonly ApplicationDbContext _db;
+
+        public LoginController(ApplicationDbContext db)
+        {
+            _db = db;
+        }
 
         public ActionResult Index()
         {
@@ -14,13 +20,9 @@ namespace ASP.NET_Final_Project.Controllers
         }
 
         [HttpPost]
-        public ActionResult PostLogin()
+        public ActionResult PostLogin(string username, string password)
         {
-            var userObj = new User();
-            userObj.UserName = Request.Form["username"];
-            userObj.Password = Request.Form["password"];
-
-            var user = Auth.CheckCredentials(userObj);
+            var user = _db.Users.FirstOrDefault(x => x.UserName == username && x.Password == password);
             if (user != null)
             {
                 HttpContext.Session.SetString("FullName", user.FullName);
@@ -38,6 +40,7 @@ namespace ASP.NET_Final_Project.Controllers
 
         public RedirectToActionResult Logout()
         {
+            HttpContext.Session.Clear();
             return RedirectToAction("Index");
         }
     }

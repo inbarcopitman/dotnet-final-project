@@ -21,4 +21,4 @@ To run the project execute the command:
 
 **Migration**
 Run the following command to build you DB.
-`update-database`
+` dotnet ef database update `

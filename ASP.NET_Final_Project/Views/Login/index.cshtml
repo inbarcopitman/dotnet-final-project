@@ -1,4 +1,3 @@
-@model Auth
 @{
     ViewData["Title"] = "Login";
 }
@@ -10,9 +9,9 @@
 <form action="/login/PostLogin" method="post">
     <div class="mb-3">
         <label for="username" class="form-label">Username</label>
-        @Html.Editor("username")
+        <input name="username" type="text" placeholder="Username" required="">
         <label for="password" class="form-label">Password</label>
-        @Html.Editor("password")
+        <input name="password" type="password" placeholder="Password" required="">
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
 </form>
