@@ -18,7 +18,7 @@
     </div>
     <div class="mb-3">
         <label for="start_year_work" class="form-label">Start Year Work</label>
-        @Html.EditorFor(x => x.StartWorkYear)
+        @Html.TextBoxFor(x => x.StartWorkYear, "{0:yyyy}")
     </div>
     <div class="mb-3">
         <label for="department" class="form-label">Department</label>

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,7 +12,9 @@ namespace ASP.NET_Final_Project.Models
         public string UserName { get; set; }
         public string Password { get; set; }
         public int NumOfActions { get; set; }
-        
+
+        public DateTime? LoggedInDate { get; set; }
+
         public virtual ICollection<Department> Departments { get; set; }
     }
 }
