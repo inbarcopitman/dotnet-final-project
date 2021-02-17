@@ -26,21 +26,23 @@ namespace ASP.NET_Final_Project.Controllers
             var user = _db.Users.FirstOrDefault(x => x.UserName == username && x.Password == password);
             if (user != null)
             {
-                if (user.NumOfActions > 0 || user.LoggedInDate != DateTime.Now.AddDays(-1))
-                {
-                    HttpContext.Session.SetString("FullName", user.FullName);
-                    HttpContext.Session.SetInt32("LoggedIn", 1);
-                    HttpContext.Session.SetInt32("Id", user.Id);
-                    HttpContext.Session.SetInt32("NumOfActionAllowed", user.NumOfActions);
+                var date = DateTime.Today;
 
-                    if (user.LoggedInDate.to != DateTime.Today)
-                        // if (user.LoggedInDate != DateTime.Today)
-                    {
-                        user.NumOfActions = 10;
-                        user.LoggedInDate = DateTime.Today;
-                        _db.SaveChanges();
-                    }
+                if (user.LoggedInDate < date)
+                {
+                    user.NumOfActions = 10;
+                    user.LoggedInDate = date;
+                    _db.SaveChanges();
                 }
+                else
+                {
+                    if (user.NumOfActions < 1) return RedirectToAction("Index");
+                }
+
+                HttpContext.Session.SetString("FullName", user.FullName);
+                HttpContext.Session.SetInt32("LoggedIn", 1);
+                HttpContext.Session.SetInt32("Id", user.Id);
+                HttpContext.Session.SetInt32("NumOfActionAllowed", user.NumOfActions);
             }
             else
             {
