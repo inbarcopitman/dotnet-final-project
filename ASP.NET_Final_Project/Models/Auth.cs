@@ -12,7 +12,7 @@ namespace ASP.NET_Final_Project.Models
             _db = db;
         }
 
-        public void CheckAndAddActions()
+        public void DecreaseActions()
         {
             var userId = 1;
             var numOfActions = 1;
