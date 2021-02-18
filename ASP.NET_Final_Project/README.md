@@ -22,3 +22,6 @@ To run the project execute the command:
 **Migration**
 Run the following command to build you DB.
 ` dotnet ef database update `
+
+**User Auth Credentials**
+Password: 123456 Username: JohnDoe
