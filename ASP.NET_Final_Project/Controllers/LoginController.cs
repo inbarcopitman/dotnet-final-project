@@ -54,6 +54,11 @@ namespace ASP.NET_Final_Project.Controllers
 
         public RedirectToActionResult Logout()
         {
+            var userId = HttpContext.Session.GetInt32("Id");
+            var User = _db.Users.First(x => x.Id == userId);
+            User.NumOfActions = (int) HttpContext.Session.GetInt32("NumOfActionAllowed");
+            _db.SaveChanges();
+
             HttpContext.Session.Clear();
             return RedirectToAction("Index");
         }

@@ -57,6 +57,7 @@ namespace ASP.NET_Final_Project
                 var loggedIn = context.Session.GetInt32("LoggedIn");
                 var currentPage = context.Request.Path.Value;
                 var loginPath = "/login";
+                var logoutPath = "/Login/Logout";
                 var homePath = "/";
 
                 if (loggedIn == null)
@@ -74,6 +75,15 @@ namespace ASP.NET_Final_Project
                 if (currentPage == "/login")
                 {
                     context.Response.Redirect(homePath);
+                    return;
+                }
+
+                var numOfActions = context.Session.GetInt32("NumOfActionAllowed");
+                var newActionNum = numOfActions - 1;
+                context.Session.SetInt32("NumOfActionAllowed", (int) newActionNum);
+                if (newActionNum == 0)
+                {
+                    context.Response.Redirect(logoutPath);
                     return;
                 }
 
