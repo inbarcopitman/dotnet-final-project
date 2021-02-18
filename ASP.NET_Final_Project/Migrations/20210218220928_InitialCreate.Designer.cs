@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP.NET_Final_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210217000705_InitialCreate")]
+    [Migration("20210218220928_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -136,6 +136,17 @@ namespace ASP.NET_Final_Project.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FullName = "John Doe",
+                            LoggedInDate = new DateTime(2021, 2, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            NumOfActions = 20,
+                            Password = "123456",
+                            UserName = "JohnDoe"
+                        });
                 });
 
             modelBuilder.Entity("ASP.NET_Final_Project.Models.Department", b =>

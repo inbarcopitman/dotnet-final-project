@@ -101,6 +101,14 @@ namespace ASP.NET_Final_Project.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                "Users",
+                new[] {"Id", "FullName", "LoggedInDate", "NumOfActions", "Password", "UserName"},
+                new object[]
+                {
+                    1, "John Doe", new DateTime(2021, 2, 19, 0, 0, 0, 0, DateTimeKind.Local), 20, "123456", "JohnDoe"
+                });
+
             migrationBuilder.CreateIndex(
                 "IX_Departments_UserId",
                 "Departments",
